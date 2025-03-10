@@ -1,77 +1,76 @@
-# WhereIsWaldo
-Advanced ip tracer, geolocation, and other info from live platforms.
+# **WhereIsWaldo: 
+Network Information and Geolocation Script**
 
-WhereIsWaldo is a Python-based IP tracking and network analysis tool designed for Linux (Debian/Ubuntu). The program allows you to track and geolocate an IP address, randomize MAC addresses for privacy, and provides detailed information such as ISP, ASN, and geographic coordinates.
+WhereIsWaldo is a Python script that provides detailed network information from your system's active network connections. It collects live IP addresses, resolves hostnames, performs traceroutes, and fetches geolocation data, all without requiring external API keys or licenses.
 
-## Features
+## **Features**
 
-- **IP Tracking**: Allows you to enter an IP address and retrieve detailed location and network information.
-- **MAC Address Randomization**: Provides the ability to randomize your MAC address to ensure privacy.
-- **GeoLocation**: Fetches geolocation data including city, country, latitude, longitude, ISP, and ASN information.
-- **Cross-Platform (Linux)**: Runs on Debian/Ubuntu systems, ensuring compatibility with most Linux environments.
-- **Automatic Dependency Installation**: The program automatically installs required dependencies if they are missing.
-- **User-Friendly Interface**: A simple GUI built using Tkinter to allow users to easily input IP addresses and view results.
+- **Live IP Detection**: Detects active network connections and retrieves the IP addresses.
+- **Hostname Resolution**: Resolves hostnames from detected live IPs.
+- **Traceroute**: Performs traceroute to show the network path to each live IP address.
+- **Geolocation**: Fetches detailed geolocation information (such as country, city, latitude, and longitude) for each IP address.
+- **Self-contained**: The script runs entirely locally with no need for external APIs or licenses.
 
-## Requirements
+## **Requirements**
 
-- **Operating System**: Debian or Ubuntu Linux (other systems are not supported).
-- **Python 3**: The program is written in Python and requires Python 3 to run.
-- **Dependencies**: The script automatically installs the following dependencies if not found:
-  - `geoip2`
-  - `pyperclip`
-  - `macchanger`
-  - `curl`
-  - `python3-pip`
-  - `geoip-bin`
+Before running WhereIsWaldo, ensure that your system meets the following dependencies. The script will automatically handle installing necessary Python libraries.
 
-## Installation
+### **Python Dependencies**
+- Python 3.6 or newer
+- `psutil` (for retrieving network connection data)
+- `socket` (for hostname resolution)
+- `subprocess` (for running system commands like `traceroute`)
+- `ipwhois` (for IP geolocation)
 
-1. **Clone the repository**:
+The script will automatically create a virtual environment (`venv`) and install any missing dependencies.
 
-   ```bash
-   git clone https://github.com/SilenceGeneric/WhereIsWaldo.git
-   cd WhereIsWaldo
-   ```
+### **Linux Dependencies**
+- `traceroute` (used to analyze the network path to each live IP)
 
-2. **Run the program**:
+## **Installation and Usage**
 
-   The program should automatically install any missing dependencies when it is executed. Simply run the following:
+### **Step 1: Clone the Repository**
 
-   ```bash
-   python3 whereiswaldo.py
-   ```
+Clone the WhereIsWaldo repository to your local machine:
 
-   Make sure you are running on a supported system (Debian or Ubuntu) and have internet access for dependency installation.
+```bash
+git clone https://github.com/SilenceGeneric/WhereIsWaldo.git
+cd WhereIsWaldo
+```
 
-## Usage
+### **Step 2: Install Dependencies**
 
-1. Open the program's GUI.
-2. Enter the IP address you wish to track in the "Track IP" field.
-3. Click the "Track IP" button to start tracking the IP address. The program will display details such as city, country, ISP, ASN, and coordinates.
-4. To randomize your MAC address, select a network interface from the dropdown and click "Randomize MAC."
-5. You can also copy the tracking information to your clipboard using the "Copy to Clipboard" button.
+The script will automatically create a virtual environment and install the required Python packages. No manual installation is necessary.
 
-## Functions Overview
+### **Step 3: Run the Script**
 
-- `install_dependencies()`: Installs the necessary dependencies for the program.
-- `download_geoip_db()`: Downloads and extracts the GeoLite2 City database for IP geolocation.
-- `check_macchanger_installed()`: Ensures `macchanger` is installed.
-- `randomize_mac_address(interface)`: Randomizes the MAC address of the selected network interface.
-- `get_ip_details(ip)`: Retrieves detailed information about the IP, including ISP, ASN, city, country, and geographical coordinates.
-- `track_ip(ip)`: Handles the IP tracking process and displays the results.
+Run the script with Python 3:
 
+```bash
+python3 whereiswaldo.py
+```
 
-## Troubleshooting
+### **Output**
 
-- **Network Connectivity**: Ensure you have an active internet connection before running the program. It requires an internet connection to download dependencies and fetch geolocation data.
-- **MAC Address Randomization**: If you encounter issues with MAC address randomization, ensure that `macchanger` is installed and your network interface supports it.
+The script will output the following information:
 
-## Contributing
+- **Live IP Addresses**: The active IP addresses detected in your system's network connections.
+- **Hostnames**: Resolved hostnames for each live IP.
+- **Traceroute**: The network path from your system to each live IP address.
+- **Geolocation**: Country, region, city, and latitude/longitude information for each live IP.
 
-Contributions are welcome! Feel free to fork the repository, submit issues, or open pull requests to help improve the project.
+Example output:
+```
+2025-03-10 12:34:56,789 - INFO - Live IP addresses found: ['192.168.1.10', '10.0.0.5']
+2025-03-10 12:34:56,789 - INFO - IP: 192.168.1.10 | Hostname: my-router.local
+2025-03-10 12:34:56,789 - INFO - IP: 10.0.0.5 | Hostname: server.local
+2025-03-10 12:34:56,789 - INFO - Traceroute result for 192.168.1.10:
+2025-03-10 12:34:56,789 - INFO - traceroute to 192.168.1.10 (192.168.1.10), 30 hops max
+...
+```
 
-## License
+## **License**
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+WhereIsWaldo is open-source software released under the [MIT License](LICENSE).
 
 ---
